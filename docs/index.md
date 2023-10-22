@@ -21,7 +21,7 @@ For Android, we aim to support the minimum API that the [system webview](https:/
 
 ## Status
 
-![Android Build](https://github.com/nbsfuse/fuse-android/actions/workflows/android.yml/badge.svg)
+![Android Build](https://github.com/btfuse/fuse-android/actions/workflows/android.yml/badge.svg)
 
 Alpha
 
