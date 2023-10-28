@@ -10,7 +10,7 @@ TODO: Insert diagram here
 
 Generally speaking, your JS module will be distributed via NPM or some other node package manager. It is distributed independently of the native framework.
 
-This has some props and cons.
+This has some pros and cons.
 
 **Pros**:
 - Ability to update and release patches of your JS module independently of your native framework.
