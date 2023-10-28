@@ -1,29 +1,25 @@
 
 # Fuse
 
+![Android Build](https://github.com/btfuse/fuse-android/actions/workflows/android.yml/badge.svg)
+
 A native-first framework for building hybdrid native-web applications.
 
 This framework is entering **alpha** stage, and not intended to be used in production code.
 
-[Documentation]('.) is pending.
-
-JavaScript Requirements:
-- ES2017/ES8
-- Some kind of bundler (e.g. [Webpack](https://webpack.js.org/))
-
 Supported Platforms:
-- Android API 24+
-- iOS 14
+
+|Platform|Version|
+|---|---|
+|Android|API 24+|
+|iOS|14+|
+|JS|ES8/ES2017|
+
+A bundler (e.g: [Webpack](https://webpack.js.org/)) is required.
 
 Supported platforms and requirements are subjected to change without notice.
 
 For Android, we aim to support the minimum API that the [system webview](https://chromium.googlesource.com/chromium/src/+/refs/heads/main/build/config/android/config.gni#67) supports. However, factory webview versions that ships with API 24 devices will not support all JS features required by this framework. These devices needs to be connected to an App Store to receive the latest webview updates for compatibility.
-
-## Status
-
-![Android Build](https://github.com/btfuse/fuse-android/actions/workflows/android.yml/badge.svg)
-
-Alpha
 
 ## What is it?
 

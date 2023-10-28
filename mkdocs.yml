@@ -13,3 +13,16 @@
 # limitations under the License.
 
 site_name: Breautek Fuse
+site_url: https://fuse.breautek.com/
+site_description: Breautek Fuse Framework User Documentation
+site_author: Breautek
+copyright: Copyright &copy; 2023 Breautek
+repo_url: https://github.com/btfuse/fuse-docs/
+edit_uri: blob/main/docs/
+markdown_extensions:
+  - callouts
+plugins:
+  - drawio-exporter
+extra_css:
+  - css/tip.css
+  - css/broken-link.css
