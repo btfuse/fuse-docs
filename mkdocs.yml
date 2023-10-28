@@ -21,8 +21,6 @@ repo_url: https://github.com/btfuse/fuse-docs/
 edit_uri: blob/main/docs/
 markdown_extensions:
   - callouts
-plugins:
-  - drawio-exporter
 extra_css:
   - css/tip.css
   - css/broken-link.css
