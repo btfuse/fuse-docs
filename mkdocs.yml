@@ -24,3 +24,8 @@ markdown_extensions:
 extra_css:
   - css/tip.css
   - css/broken-link.css
+
+nav:
+  - Home: index.md
+  - Plugin Development:
+    - Fuse JS Modules: plugins/js-module.md
