@@ -1,0 +1,76 @@
+<mxfile host="Electron" modified="2023-10-29T15:42:59.162Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.0.3 Chrome/114.0.5735.289 Electron/25.8.4 Safari/537.36" etag="XfGhiP7i72YAZwsVhLOr" version="22.0.3" type="device">
+  <diagram name="Page-1" id="18w3s1JcJk1HpVIib0J4">
+    <mxGraphModel dx="1114" dy="999" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="L-FO9ZeYMuGEKLxifyUo-3" value="" style="group" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="30" y="160" width="580" height="390" as="geometry" />
+        </mxCell>
+        <mxCell id="L-FO9ZeYMuGEKLxifyUo-11" value="" style="group" vertex="1" connectable="0" parent="L-FO9ZeYMuGEKLxifyUo-3">
+          <mxGeometry x="80" y="-40" width="500" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="L-FO9ZeYMuGEKLxifyUo-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="L-FO9ZeYMuGEKLxifyUo-11">
+          <mxGeometry x="-30" width="500" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="L-FO9ZeYMuGEKLxifyUo-2" value="Native Platform" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#000000;" vertex="1" parent="L-FO9ZeYMuGEKLxifyUo-11">
+          <mxGeometry x="-30" width="110" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="L-FO9ZeYMuGEKLxifyUo-4" value="API Server" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="L-FO9ZeYMuGEKLxifyUo-11">
+          <mxGeometry x="340" y="50" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="L-FO9ZeYMuGEKLxifyUo-5" value="Fuse Framework" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="L-FO9ZeYMuGEKLxifyUo-11">
+          <mxGeometry x="180" y="50" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="L-FO9ZeYMuGEKLxifyUo-6" value="Device APIs" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="L-FO9ZeYMuGEKLxifyUo-11">
+          <mxGeometry x="10" y="50" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="L-FO9ZeYMuGEKLxifyUo-39" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="L-FO9ZeYMuGEKLxifyUo-11" source="L-FO9ZeYMuGEKLxifyUo-4" target="L-FO9ZeYMuGEKLxifyUo-5">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="410" y="220" as="sourcePoint" />
+            <mxPoint x="410" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="L-FO9ZeYMuGEKLxifyUo-40" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="L-FO9ZeYMuGEKLxifyUo-11" source="L-FO9ZeYMuGEKLxifyUo-5" target="L-FO9ZeYMuGEKLxifyUo-6">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="350" y="90" as="sourcePoint" />
+            <mxPoint x="310" y="90" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="L-FO9ZeYMuGEKLxifyUo-12" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="L-FO9ZeYMuGEKLxifyUo-3">
+          <mxGeometry x="50" y="150" width="500" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="L-FO9ZeYMuGEKLxifyUo-13" value="Webview" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontColor=#000000;" vertex="1" parent="L-FO9ZeYMuGEKLxifyUo-3">
+          <mxGeometry x="50" y="150" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="L-FO9ZeYMuGEKLxifyUo-14" value="FusePlugin" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="L-FO9ZeYMuGEKLxifyUo-3">
+          <mxGeometry x="420" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="L-FO9ZeYMuGEKLxifyUo-17" value="FuseContext" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="L-FO9ZeYMuGEKLxifyUo-3">
+          <mxGeometry x="260" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="L-FO9ZeYMuGEKLxifyUo-19" value="" style="endArrow=block;startArrow=block;endFill=1;startFill=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="L-FO9ZeYMuGEKLxifyUo-3" source="L-FO9ZeYMuGEKLxifyUo-17" target="L-FO9ZeYMuGEKLxifyUo-14">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="450" y="450" as="sourcePoint" />
+            <mxPoint x="610" y="450" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="L-FO9ZeYMuGEKLxifyUo-36" value="FuseAPI" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="L-FO9ZeYMuGEKLxifyUo-3">
+          <mxGeometry x="420" y="170" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="L-FO9ZeYMuGEKLxifyUo-37" value="" style="endArrow=diamondThin;endFill=0;endSize=24;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="L-FO9ZeYMuGEKLxifyUo-3" source="L-FO9ZeYMuGEKLxifyUo-14" target="L-FO9ZeYMuGEKLxifyUo-36">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="400" y="510" as="sourcePoint" />
+            <mxPoint x="560" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="L-FO9ZeYMuGEKLxifyUo-38" value="Use" style="endArrow=open;endSize=12;dashed=1;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="L-FO9ZeYMuGEKLxifyUo-3" source="L-FO9ZeYMuGEKLxifyUo-36" target="L-FO9ZeYMuGEKLxifyUo-4">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="670" y="240" as="sourcePoint" />
+            <mxPoint x="830" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

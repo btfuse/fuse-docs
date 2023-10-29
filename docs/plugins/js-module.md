@@ -4,7 +4,10 @@
 A Fuse JS module is the webview runtime API into your plugin.
 It is the common interface into your native code supplied by the native framework.
 
-TODO: Insert diagram here
+<div style="text-align: center">
+    <img src="/res/JSModuleArchitecture.png" />
+</div>
+</br />
 
 ## Version Management
 
