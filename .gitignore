@@ -1,2 +1,6 @@
+
 /site
 
+#DrawIO Temp files
+*.bkp
+*.dtmp

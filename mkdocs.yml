@@ -28,4 +28,5 @@ extra_css:
 nav:
   - Home: index.md
   - Plugin Development:
-    - Fuse JS Modules: plugins/js-module.md
+    - Getting Started: plugin-development/getting-started.md
+    - Fuse JS Modules: plugin-development/js-module.md

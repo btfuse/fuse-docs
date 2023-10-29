@@ -7,40 +7,9 @@ A Fuse JS module is the webview runtime API into your plugin.
 It is the common interface into your native code supplied by the native framework.
 
 <div style="text-align: center">
-    <img src="/res/JSModuleArchitecture.png" />
+    <img src="/res/JSModuleArchitecture.svg" />
 </div>
 </br />
-
-## Version Management
-
-Generally speaking, your JS module will be distributed via NPM or some other node package manager. It is distributed independently of the native framework.
-
-This has some pros and cons.
-
-**Pros**:
-- Ability to update and release patches of your JS module independently of your native framework.
-- Decoupling of the JS module to the native framework allows
-you to swap out native implementations (e.g. A free vs paid version of a library).
-- Allows you to distribute your plugin via standard distribution channels.
-
-**Cons**:
-- The decoupled nature allows users to mix and match your native framework version and JS module version that is potentially incompatible.
-- Can be more difficult to manage, and errors arising from
-version mismatches can be difficult to recognize.
-
-While these guidelines are not set in stone, we would highly recommend adopting [semver](https://semver.org/) Semantic Versioning.
-
-At a glance:
-
-> Given a version number MAJOR.MINOR.PATCH, increment the:
-> 
-> 1. MAJOR version when you make incompatible API changes
-> 2. MINOR version when you add functionality in a backward compatible manner
-> 3. PATCH version when you make backward compatible bug fixes
-
-In otherwords, if your native API changes in such a way that it requires modifications to your JS module, both your native API and JS module should have a **MAJOR** version increment.
-
-Adding a new API to the native framework doesn't affect the JS module, it simply just won't be *exposed* and therefore this update could be a **MINOR** version update because it is still backwards compatible. The JS Module could then be updated to include this new API, which as long as no existing features depend on this API, it can be considered *non-breaking* and be released as a **MINOR** version update.
 
 ## Development Tooling
 
