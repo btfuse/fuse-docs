@@ -31,6 +31,34 @@ On the webview side, share some "sister" objects. There is a `FuseContext` who s
 
 If this doesn't make much sense right now, don't fret. We will dig into more details later.
 
+### Plugin Identifiers
+
+A plugin has an identifier which is provided by a concrete implementation.
+The ID shall be constant and unique, and should be replicated in the Android and iOS framework code. It is a glue piece that ties your JS module to the native code.
+
+The ID must be unique to not clash with other plugins, so choose a descriptive name that represents your plugin. It's a good idea to prefix with your company name, or the initials of your company name, or a reverse domain.
+
+NOTE: Breautek reserves the prefixes `Fuse`, `BT`, and `BTFuse`.
+
+NOTE: The ID is used inside a HTTP URL, therefore choose URL safe characters.
+
+Let's assume your company is `Super Example Incorporated` then
+
+Good examples include (but not limited to):
+
+- `SuperExampleEcho`
+- `SEIEcho`
+- `SEI_Echo`
+- `SEI-Echo`
+- `com.superexample.echo`
+
+Bad examples includes (but not limited to):
+
+- `Echo` (too generic)
+- `FuseEcho` (Using a reserved prefix)
+- `ApacheEcho` (Using a prefix that is likely used by another corporation)
+- `BTEcho` (Another reserved prefix)
+
 ## Plugin Directory Structure
 
 While there is nothing that requires this structure, this guide will recommend and assume the following directory structure:
@@ -104,7 +132,6 @@ At a glance:
 In otherwords, if your native API changes in such a way that it requires modifications to your JS module, both your native API and JS module should have a **MAJOR** version increment.
 
 Adding a new API to the native framework doesn't affect the JS module, it simply just won't be *exposed* and therefore this update could be a **MINOR** version update because it is still backwards compatible. The JS Module could then be updated to include this new API, which as long as no existing features depend on this API, it can be considered *non-breaking* and be released as a **MINOR** version update.
-
 
 ## Further Reading
 

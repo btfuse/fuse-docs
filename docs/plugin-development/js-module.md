@@ -3,6 +3,9 @@ WARNING: This documentation is actively being developed and links may change.
 
 # Fuse JS Module
 
+This guide assumes you've already read and followed [Getting Started](getting-started.md). If not,
+we strongly recommend beginning there first before proceeding.
+
 A Fuse JS module is the webview runtime API into your plugin.
 It is the common interface into your native code supplied by the native framework.
 
@@ -254,31 +257,12 @@ export class EchoPlugin extends FusePlugin {
 ### Plugin ID
 
 A plugin's only requirement is to provide an id via `_getID` method.
+
 The ID shall be constant and unique, and should be replicated in the Android and iOS framework code. It is a glue piece that ties your JS module to the native code.
 
 The ID must be unique to not clash with other plugins, so choose a descriptive name that represents your plugin. It's a good idea to prefix with your company name, or the initials of your company name, or a reverse domain.
 
-NOTE: Breautek reserves the prefixes `Fuse`, `BT`, and `BTFuse`.
-
-NOTE: The ID is used inside a HTTP URL, therefore choose URL safe characters.
-
-Let's assume your company is `Super Example Incorporated` then
-
-Good examples include (but not limited to):
-
-- `SuperExampleEcho`
-- `SEIEcho`
-- `SEI_Echo`
-- `SEI-Echo`
-- `com.superexample.echo`
-
-Bad examples includes (but not limited to):
-
-- `Echo` (too generic)
-- `FuseEcho` (Using a reserved prefix)
-- `ApacheEcho` (Using a prefix that is likely used by another corporation)
-- `BTEcho` (Another reserved prefix)
-
+For more information see the Getting Started [Plugin Identifiers](./getting-started.md#plugin-identifiers) section.
 
 ### echo Implementation
 
@@ -369,6 +353,55 @@ export declare class FuseAPIResponse {
 ```
 
 The first paramater is an API endpoint. It always starts with a `/` and will correspond to an API handler implemented on the native side. This is however out of scope of this guide.
+
+### Callback Method
+
+A callback is something that Fuse can create that contains an identifier that can be passed to native platform. The platform can then use the callback identifier to post a string back to at a later time or in a continuous, periodic fashion.
+
+There are pros and cons to using callbacks. The HTTP API must resolve in a timely manner, whereas callbacks can be set and indefinitely awaited on. They are perfect for watch or listener APIs.
+
+Additionally, the HTTP API must have exactly 1 response. Whereas a callback can be used several times, again making them good for watch and/or listener style APIs.
+
+They however only support textual data and data transfer is not very efficient compared to the HTTP api. They are not suitable for sending large datasets or binary datasets.
+
+A `FusePlugin` can create a callback using a protected `_createCallback` method:
+
+```typescript
+let callbackID: string = this._createCallback((payload: string) => {
+    // Callback was invoked!
+});
+```
+
+The returned `callbackID` can be passed to the native platform where the native platform can use the `callbackID` to invoke the callback function in the webview, passing in textual data.
+
+Callbacks are held in a global object and will not be released until the plugin calls `_releaseCallback` giving the `callbackID`. To avoid memory leaks, make sure to have a path to `_releaseCallback` once you're done using it.
+
+Let's setup a new API that uses this callback method:
+
+```typescript
+export class EchoPlugin extends FusePlugin {
+    ...
+
+    public async subscribe(cb: (data: string) => void): Promise<string> {
+        let callbackID: string = this._createCallback((payload: string) => {
+            cb(payload);
+        });
+
+        await this._exec('/registerCallback', ContentType.TEXT, callbackID);
+
+        return callbackID;
+    }
+
+    public async unsubscribe(callbackID: string): Promise<void> {
+        await this._exec('/unregisterCallback', ContentType.TEXT, callbackID);
+        this._releaseCallback(callbackID);
+    }
+}
+```
+
+In this example, we create 2 new APIs, one that registers a callback to the native platform, and one that unregisters a callback.
+
+The webview side will release the callback, but we also give the callback id to the native platform so it can also clean up native resources associated with the callback.
 
 ## Setting up the Public API
 
@@ -525,4 +558,4 @@ This concludes the Fuse JS Module guide, but this example Fuse plugin is incompl
 Moving forward, See the the list of native platform guides:
 
 - <span class="broken-link">iOS Plugin Guide</span>
-- <span class="broken-link">Android Plugin Guide</span>
+- [Android Plugin Guide](android-module.md)
