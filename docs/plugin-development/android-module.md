@@ -386,7 +386,240 @@ Now when `/registerCallback` is called with a callback ID, the callback will be 
 
 ## Unit Testing
 
-TBD
+The Fuse framework promotes unit testing capabilites using the native unit testing suite. For android development, this means junit and android's instrumented unit test framework can be used.
+
+Keen observers might have noticed that Android Studio has created a `test` and `androidTest` flavour of your modules, with example test code. The `test` flavour runs fast, but runs on your development's machine JVM, so android APIs aren't available. This makes sense if you're trying to test a particular class that doesn't use any device APIs directly and the test can be compiled and ran very fast.
+
+Whereas `androidTest` is an instrumented test. That is the test code needs to be compiled and deployed to a simulator. This is slower and consumes more hardware resources, but tests will have access to device APIs.
+
+This guide won't go into details on android unit testing, so if you want to learn more, I encourage the read of the [android docs](https://developer.android.com/training/testing/fundamentals).
+
+Let's get started.
+
+### Test Tools
+
+Like the JS modules, Fuse offers some test tools that assists in testing in a Fuse environment and is available under the [com.breautek.fuse:test-tools](https://archiva.breautek.com/#artifact/com.breautek.fuse/test-tools) artefact.
+
+The test tools library does require android APIs and thefore can only be used in instrumented tests.
+
+In the dependencies block, add:
+
+```kotlin
+androidTestImplementation("com.breautek.fuse:test-tools:0.0.1")
+```
+
+TIP: You can find the latest release [here](https://archiva.breautek.com/#artifact/com.breautek.fuse/test-tools)
+
+And because our unit test will also use the core fuse framework, we need to also add:
+
+```kotlin
+androidTestImplementation("com.breautek.fuse:core:0.7.1")
+```
+
+### Test Project Configuration
+
+Because our test project will use the network and activities, it needs some additional configuration.
+
+#### Network Security Policy
+
+Like fuse standard applications, the fuse framework makes a HTTP connection to a locally embedded API server therefore, we need to add a network policy allowing unencrypted traffic on localhost.
+
+First we need a `androidTest` `xml` resource directory. Right-click the plugin project and go to `New` -> `Android Resource Directory`.
+
+In the `New Resource Directory` dialog, choose the `xml` resource type and `androidTest` source set.
+
+Right click again and choose `New` -> `XML Resource File`. Set the following settings:
+
+|Setting|Value|
+|---|---|
+|File name|`network`|
+|Root element|`network-security-config`|
+|Source set|`androidTest`|
+
+<div style="text-align: center">
+    <img src="/res/android-network-security-config.png" />
+</div>
+</br />
+
+Add The following XML:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">localhost</domain>
+    </domain-config>
+</network-security-config>
+```
+
+#### Android Manifest
+
+Because we need to use activity and have a network security policy, we need a `AndroidManifest.xml` for our `androidTest` environment.
+
+Right click `manifests` folder and go to `New` -> `Other` -> `Android Manifest File`.
+
+In the dialog, `Target Source Set` strangely won't allow you to select the `androidTest` source set. Instead, check `Change File Location` and change the location to `src/androidTest/AndroidManifest.xml`
+
+<div style="text-align: center">
+    <img src="/res/android-new-manifest.png" />
+</div>
+</br />
+
+Inside the `androidTest`'s `AndroidManifest.xml` write:
+
+```xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-sdk android:minSdkVersion="24" android:targetSdkVersion="34" />
+    <application
+        android:networkSecurityConfig="@xml/network"
+    >
+        <activity
+            android:name="com.example.fuse.echoplugin.test.EchoTestActivity"
+            android:theme="@style/Theme.AppCompat"
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
+```
+
+NOTE: `@xml/network` may appear red in the Android Studio IDE stating `Cannot resolve symbol '@xml/network'` even if `androidTest` has a `res/xml/network.xml` file present. This appears to be a bug with the IDE and can be ignored, unless if an issue actually occurs while running the tests.
+
+### Test Code
+
+Inside the `androidTest` variant, create a new `EchoPluginTest` class:
+
+<div style="text-align: center">
+    <img src="/res/android-echo-plugin-test-class.png" />
+</div>
+</br />
+
+And add the following code:
+
+```java
+package com.example.fuse.echoplugin.test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import com.breautek.fuse.test.FuseTestAPIClient;
+
+@RunWith(AndroidJUnit4.class)
+public class EchoPluginTest {
+
+    @Rule
+    public ActivityScenarioRule<EchoTestActivity> activityRule = new ActivityScenarioRule<>(EchoTestActivity.class);
+
+    @BeforeClass
+    public static void setUp() {}
+
+    @AfterClass
+    public static void tearDown() {}
+
+    @Test
+    public void canDoSimpleEchoRequest() {
+        activityRule.getScenario().onActivity(activity -> {
+            int port = activity.getFuseContext().getAPIPort();
+            String secret = activity.getFuseContext().getAPISecret();
+
+            FuseTestAPIClient client = new FuseTestAPIClient.Builder()
+                    .setAPIPort(port)
+                    .setAPISecret(secret)
+                    .setPluginID("EchoPlugin")
+                    .setType("text/plain")
+                    .setEndpoint("/echo")
+                    .setContent("Hello Test!")
+                    .build();
+
+            FuseTestAPIClient.FuseAPITestResponse response = client.execute();
+            assertEquals(200, response.getStatus());
+            assertTrue(response.readAsString().contains("Hello Test!"));
+        });
+    }
+}
+```
+
+Inside the `androidTest` variant, create a new `EchoTestActivity` class:
+
+```java
+package com.example.fuse.echoplugin.test;
+
+import android.os.Bundle;
+
+import com.breautek.fuse.FuseContext;
+import com.breautek.fuse.test.FuseTestActivity;
+import com.example.fuse.echoplugin.EchoPlugin;
+
+public class EchoTestActivity extends FuseTestActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        FuseContext fuseContext = getFuseContext();
+        fuseContext.registerPlugin(new EchoPlugin(fuseContext));
+    }
+}
+```
+
+So to recap what we've done, we have:
+
+1. Created an `androidTest` `AndroidManifest.xml` so that
+2. we can specify a network security policy for our `androidTest` environment, to
+3. allow plaintext traffic to `localhost`
+4. Created a `EchoTestActivity` to serve as our main activity that holds the `FuseContext` and our `EchoPlugin` instance.
+5. A `EchoPluginTest` which contains our test cases, including one that demonstrates
+   hitting the API endpoint and asserts the response code and response body content.
+
+#### Running the unit tests
+
+Now that we have all the configuration and unit test code in place, let's try running the test.
+
+Test can be ran via gradle or directly inside Android Studio. Since we are already in Android Studio, let's get that setup. By default, Android Studio only has 1 Run Configuration configured, which is to run the app. What we need is a Run Configuration for our `androidTest`.
+
+In the top-right corner, click on the Run Configuration menu and click `Edit Configurations...`:
+
+<div style="text-align: center">
+    <img src="/res/android-run-configurations.png" />
+</div>
+</br />
+
+Then click on the `+` icon to add a new configuration and select `Android Instrumented Tests`.
+
+Optionally you can give the configuration a new name. The default name is `All Tests`.
+
+Select the `EchoPlugin.EchoPlugin.androidTest` module then click `OK`.
+
+Now the `Run Configuration` will be set to `All Tests`. When you run this configuration, the unit tests will build and run against the selected device.
+
+<div style="text-align: center">
+    <img src="/res/android-tests-passed.png" />
+</div>
+</br />
+
+If your tests passes, conguratulations! You have successfully created an android module that is capable of listening and responding to API calls from the webview!
+
+Alternatively you can run the tests via Gradle from command line:
+
+Unix: `./gradlew connectedAndroidTest`
+
+Windows: `./gradlew.bat connectedAndroidTest`
 
 ## Creating a Test App
 
