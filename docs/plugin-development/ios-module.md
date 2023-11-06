@@ -1,7 +1,7 @@
 
 WARNING: This documentation is actively being developed and links may change.
 
-# Fuse iOS Module
+# iOS Module
 
 TBD
 

@@ -1,7 +1,7 @@
 
 WARNING: This documentation is actively being developed and links may change.
 
-# Fuse JS Module
+# JavaScript Module
 
 This guide assumes you've already read and followed [Getting Started](getting-started.md). If not,
 we strongly recommend beginning there first before proceeding.

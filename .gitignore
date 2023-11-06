@@ -5,3 +5,7 @@
 #DrawIO Temp files
 *.bkp
 *.dtmp
+
+#Python Virtual Environment
+/venv
+

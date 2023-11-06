@@ -1,7 +1,7 @@
 
 WARNING: This documentation is actively being developed and links may change.
 
-# Fuse Android Module
+# Android Module
 
 This guide assumes you've already read and followed [Fuse JS Module](js-module.md). If not,
 we strongly recommend beginning there first before proceeding.

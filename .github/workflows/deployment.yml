@@ -36,12 +36,11 @@ jobs:
           python-version: '3.11.2'
       - name: Setup Pages
         uses: actions/configure-pages@v3
+      - run: pip3 -m venv venv
+      - run: source venv/bin/activate
       - run: pip3 install -r requirements.txt
       - run: mkdocs build
-      # - name: MkDocs Build
-      #   uses: Tiryoh/actions-mkdocs@v0.22.0
-      #   with:
-      #     mkdocs_version: 1.5.3
+      - run: deactivate
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:

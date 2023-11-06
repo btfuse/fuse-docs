@@ -38,6 +38,26 @@ If native development is not part of your team's skillset, then other hybdrid fr
 
 Otherwise you're probably well adept in native development already, why would you use this framework? Well the Native-Webview glue is already built for you with a plugin API. Everything is designed so that you can write the native code inside the native IDE and have access to native intellisense and other build/project features. Surely one could be written and that may do the job if you're only using a WebView for a one-off page, but if the intent is to build fully features native application with a web-based UI backed by a native API, then this framework is probably for you.
 
+Let's have a look at the other common platforms that achieves the same goal.
+
+|Capability|Fuse|Cordova|CapacitorJS|
+|:---:|:---:|:---:|:---:|
+|Android|:white_check_mark:|:white_check_mark:|:white_check_mark:
+|iOS|:white_check_mark:|:white_check_mark:|:white_check_mark:|
+|Electron|:x:|:white_check_mark:|:question:|
+|Plugin Support|:white_check_mark:|:white_check_mark:|:white_check_mark:|
+|Modular Plugins|:white_check_mark:|:x:<sup>2</sup>|:question:|
+|Binary Support|:white_check_mark:|:white_check_mark:<sup>1</sup>|:white_check_mark:<sup>1</sup>|
+|Plugin Ecosystem|Bare|Expansive|Large with some Cordova<br />cross-compatibilty
+|Unit Testability|:white_check_mark:|:x:<sup>3</sup>|:question:
+
+<sup>1</sup>Cordova & CapacitorJS supports binary via Base64 encoding whereas Fuse
+has native binary support.
+
+<sup>2</sup>Cordova has limited support for distributing plugins as native modules due to their usage of looking up symbols by string. It's not known if CapacitorJS has the same restriction.
+
+<sup>3</sup>Cordova has an internal `paramedic` tool for unit testing plugins, but plugin projects are typically not housed in a real native project and do not have access to native test tools. It's not known if CapacitorJS have the same limitations. Fuse has access to native test tools as well as your choice of a JS test runner.
+
 ## Architecture
 
 The architecture of the Fuse framework consists of primarily two layers: Native and Webview side, glued by a HTTP protocol API with plugin support to extend functionality where needed.
