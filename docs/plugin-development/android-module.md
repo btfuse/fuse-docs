@@ -624,3 +624,5 @@ Windows: `./gradlew.bat connectedAndroidTest`
 ## Creating a Test App
 
 TBD
+
+Meanwhile, most of [User Guide](../user-guide/getting-started.md) applies.
