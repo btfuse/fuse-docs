@@ -48,7 +48,7 @@ deactivate
 
 ## Building the documentation
 
-THis section assumes you're already in a python virtual env.
+This section assumes you're already in a python virtual env.
 
 Building can be done by running:
 
