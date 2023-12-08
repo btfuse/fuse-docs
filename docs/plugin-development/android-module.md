@@ -416,84 +416,6 @@ And because our unit test will also use the core fuse framework, we need to also
 androidTestImplementation("com.breautek.fuse:core:0.7.1")
 ```
 
-### Test Project Configuration
-
-Because our test project will use the network and activities, it needs some additional configuration.
-
-#### Network Security Policy
-
-Like fuse standard applications, the fuse framework makes a HTTP connection to a locally embedded API server therefore, we need to add a network policy allowing unencrypted traffic on localhost.
-
-First we need a `androidTest` `xml` resource directory. Right-click the plugin project and go to `New` -> `Android Resource Directory`.
-
-In the `New Resource Directory` dialog, choose the `xml` resource type and `androidTest` source set.
-
-Right click again and choose `New` -> `XML Resource File`. Set the following settings:
-
-|Setting|Value|
-|---|---|
-|File name|`network`|
-|Root element|`network-security-config`|
-|Source set|`androidTest`|
-
-<div style="text-align: center">
-    <img src="/res/android-network-security-config.png" />
-</div>
-</br />
-
-Add The following XML:
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<network-security-config xmlns:android="http://schemas.android.com/apk/res/android">
-    <base-config cleartextTrafficPermitted="false">
-        <trust-anchors>
-            <certificates src="system" />
-        </trust-anchors>
-    </base-config>
-    <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="false">localhost</domain>
-    </domain-config>
-</network-security-config>
-```
-
-#### Android Manifest
-
-Because we need to use activity and have a network security policy, we need a `AndroidManifest.xml` for our `androidTest` environment.
-
-Right click `manifests` folder and go to `New` -> `Other` -> `Android Manifest File`.
-
-In the dialog, `Target Source Set` strangely won't allow you to select the `androidTest` source set. Instead, check `Change File Location` and change the location to `src/androidTest/AndroidManifest.xml`
-
-<div style="text-align: center">
-    <img src="/res/android-new-manifest.png" />
-</div>
-</br />
-
-Inside the `androidTest`'s `AndroidManifest.xml` write:
-
-```xml
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-sdk android:minSdkVersion="24" android:targetSdkVersion="34" />
-    <application
-        android:networkSecurityConfig="@xml/network"
-    >
-        <activity
-            android:name="com.example.fuse.echoplugin.test.EchoTestActivity"
-            android:theme="@style/Theme.AppCompat"
-            android:exported="true"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
-</manifest>
-```
-
-NOTE: `@xml/network` may appear red in the Android Studio IDE stating `Cannot resolve symbol '@xml/network'` even if `androidTest` has a `res/xml/network.xml` file present. This appears to be a bug with the IDE and can be ignored, unless if an issue actually occurs while running the tests.
-
 ### Test Code
 
 Inside the `androidTest` variant, create a new `EchoPluginTest` class:
@@ -580,11 +502,8 @@ public class EchoTestActivity extends FuseTestActivity {
 
 So to recap what we've done, we have:
 
-1. Created an `androidTest` `AndroidManifest.xml` so that
-2. we can specify a network security policy for our `androidTest` environment, to
-3. allow plaintext traffic to `localhost`
-4. Created a `EchoTestActivity` to serve as our main activity that holds the `FuseContext` and our `EchoPlugin` instance.
-5. A `EchoPluginTest` which contains our test cases, including one that demonstrates
+1. Created a `EchoTestActivity` to serve as our main activity that holds the `FuseContext` and our `EchoPlugin` instance.
+2. A `EchoPluginTest` which contains our test cases, including one that demonstrates
    hitting the API endpoint and asserts the response code and response body content.
 
 #### Running the unit tests
