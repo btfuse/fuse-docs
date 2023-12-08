@@ -14,7 +14,7 @@ Supported Platforms:
 |Platform|Version|
 |---|---|
 |Android|API 24+|
-|iOS|14+|
+|iOS|15+|
 |JS|ES8/ES2017|
 
 A bundler (e.g: [Webpack](https://webpack.js.org/)) is required.
