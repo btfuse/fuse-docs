@@ -82,10 +82,27 @@ For example, if you need to fetch a large file, it can be sent to the WebView as
 
 In our testing, a Cordova app with the file plugin installed using the traditional native bridge API can send a 100mb data file to the webview in approximately 2,000ms. With the HTTP API approach, that same 100mb data file can be sent to the webview in approximately 100ms. That's about a 20x improvement on performance.
 
-<sup>1</sup> The embedded HTTP server API will be used for as long as [WebResourceRequest](https://developer.android.com/reference/android/webkit/WebResourceRequest) lacks the ability to read the HTTP content body. It is a security concern to have a web server open, and having non-intentional actors requesting or probing the server, or potentially making native API calls on the behalf of the host application. Here are a few ways to minimize the risk of exploits:
+### API Server Security
 
-1. We do not assign an explicit port. When a FuseContext is created, the HTTP API server will be spawned with a random available port. This not only protects multiple apps from clashing for the same port, but also makes it more difficult to probe for Fuse framework instances.
-2. When the HTTP API server is created, a crytographic key is generated. The server will expect this key to be present on every request made, blocking probing from unintentional actors.
+The embedded API server is secured in several ways.
+
+#### Security by Obscurity
+
+The first layer is done by obscurity. The API server is only listened on localhost, on a random available port. This is a requirement to avoid conflicts with potentially other apps running the Fuse framework, as well as making it more difficult for the API server to be discovered or probed.
+
+The application itself contains an API to find the current port.
+
+#### Secret Tokens
+
+The API server will generate a crytographic token which must be present when making API requests. The application itself contains an API to get this token. If the token is not present or correct, the embedded API server will refuse to accept any connections.
+
+#### TLS Enabled
+
+The API Server has TLS enabled using a self-signed certificate and private key generated during application launch. The embedded WebView will trust the certificate that was signed by its own private key.
+
+The generated keypair for TLS is never stored permanently and is used only for the lifetime of the application. On every application launch, a new keypair is generated. While self-signed certificates don't have a trusted CA, this specific self-signed certificates can be trusted since the application itself is the entity that created them. The embedded webview will test and assert the certificate was signed by its current generated private key. This gives the application some confidence that HTTPS is at least encrypting data securely for transit.
+
+Enabling TLS even on localhost connections allows the application to send data from the webview to the API server and vice versa securely, without third-party snooping on the network interfaces.
 
 #### The Web Environment
 
@@ -101,16 +118,8 @@ It would be recommended to incorporate a module bundle that can take NPM modules
 
 ## License
 
-Copyright 2023 Breautek
+Copyright 2023-2024 Breautek
 
 Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
 
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">http://www.apache.org/licenses/LICENSE-2.0</a>
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+For full details, see <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">http://www.apache.org/licenses/LICENSE-2.0</a>
