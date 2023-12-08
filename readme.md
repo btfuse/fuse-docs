@@ -14,13 +14,58 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-# Welcome to MkDocs
+# Contributor Documentation
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+Fuse documentation and website is powered by mkdocs. For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 
-## Commands
+Python is required to build the website. Mkdocs also provides a server with auto hot reload for development.
 
-* `mkdocs new [dir-name]` - Create a new project.
+## Setting up the development environment
+
+If you don't have already have a virtual env, it would be recommended to create one:
+
+```bash
+python3 -m venv venv
+```
+
+Activate the environment:
+
+```bash
+source venv/bin/activate
+```
+
+And install the dependencies:
+
+```bash
+pip3 install -r requirements.txt
+```
+
+To deactivate/exit the virtual environment, run:
+
+```bash
+deactivate
+```
+
+## Building the documentation
+
+THis section assumes you're already in a python virtual env.
+
+Building can be done by running:
+
+```bash
+mkdocs build
+```
+
+However, if you want to actually test and see your changes, serving might be better:
+
+```bash
+mkdocs serve
+```
+
+This will run a local webserver.
+
+## Common Mkdocs Commands
+
 * `mkdocs serve` - Start the live-reloading docs server.
 * `mkdocs build` - Build the documentation site.
 * `mkdocs -h` - Print help message and exit.
