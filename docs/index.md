@@ -104,6 +104,8 @@ The generated keypair for TLS is never stored permanently and is used only for t
 
 Enabling TLS even on localhost connections allows the application to send data from the webview to the API server and vice versa securely, without third-party snooping on the network interfaces.
 
+The embedded API server is a closed system intended for a single client, which is your own application. This is how we can assert trust on a self-signed certificate since the application itself acts as the CA.
+
 #### The Web Environment
 
 The Fuse framework for the most part is rather unopinionated about your web assets. Simply drop in your HTML, css and JS and it can load them up. It does make few assumptions:

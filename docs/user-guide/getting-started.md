@@ -288,4 +288,4 @@ Don't worry that's covered in our next guides.
 Please see:
 
 - <span class="broken-link">iOS User Guide</span>
-- <span class="broken-link">Android User Guide</span>
+- [Android User Guide](./android-guide.md)

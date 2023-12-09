@@ -44,6 +44,7 @@ nav:
   - Home: index.md
   - User Guide:
     - Getting Started: user-guide/getting-started.md
+    - Android Guide: user-guide/android-guide.md
   - Plugin Development:
     - Getting Started: plugin-development/getting-started.md
     - Fuse JS Modules: plugin-development/js-module.md
