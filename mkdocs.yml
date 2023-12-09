@@ -42,8 +42,8 @@ extra_css:
 
 nav:
   - Home: index.md
-  # - User Guide:
-  #   - Getting Started: user-guide/getting-started.md
+  - User Guide:
+    - Getting Started: user-guide/getting-started.md
   - Plugin Development:
     - Getting Started: plugin-development/getting-started.md
     - Fuse JS Modules: plugin-development/js-module.md
