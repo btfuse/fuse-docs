@@ -44,7 +44,7 @@ Let's have a look at the other common platforms that achieves the same goal.
 |:---:|:---:|:---:|:---:|
 |Android|:white_check_mark:|:white_check_mark:|:white_check_mark:
 |iOS|:white_check_mark:|:white_check_mark:|:white_check_mark:|
-|Electron|:x:|:white_check_mark:|:question:|
+|Electron|:x:|:white_check_mark:|:white_check_mark:<sup>4</sup>|
 |Plugin Support|:white_check_mark:|:white_check_mark:|:white_check_mark:|
 |Modular Plugins|:white_check_mark:|:x:<sup>2</sup>|:question:|
 |Binary Support|:white_check_mark:|:white_check_mark:<sup>1</sup>|:white_check_mark:<sup>1</sup>|
@@ -57,6 +57,8 @@ has native binary support.
 <sup>2</sup>Cordova has limited support for distributing plugins as native modules due to their usage of looking up symbols by string. It's not known if CapacitorJS has the same restriction.
 
 <sup>3</sup>Cordova has an internal `paramedic` tool for unit testing plugins, but plugin projects are typically not housed in a real native project and do not have access to native test tools. It's not known if CapacitorJS have the same limitations. Fuse has access to native test tools as well as your choice of a JS test runner.
+
+<sup>4</sup>CapacitorJS has a community-driven Electron platform.
 
 ## Architecture
 
