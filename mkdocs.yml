@@ -23,6 +23,7 @@ edit_uri: blob/main/docs/
 theme:
   name: material
   logo: res/fuse-logo.svg
+  favicon: res/favicon.svg
   features:
     - search.suggest
   palette:
