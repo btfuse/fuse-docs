@@ -121,7 +121,7 @@ The Fuse framework for the most part is rather unopinionated about your web asse
 URL fragment design in general are reserved by the Fuse framework.
 
 Additionally if you want to make use of the Fuse API and use Fuse plugins, you'll need to import `@btfuse/core` which is an unbundled JS module.
-It would be recommended to incorporate a module bundle that can take NPM modules and bundle them (either in a single file, or a chunked fashion). See the test app for a [webpack configuration example](./testapp/webpack.config.js).
+It would be recommended to incorporate a module bundle that can take NPM modules and bundle them (either in a single file, or a chunked fashion). See the test app for a [webpack configuration example](https://github.com/btfuse/fuse-test-app).
 
 ## License
 
