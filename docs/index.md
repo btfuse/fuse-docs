@@ -29,7 +29,7 @@ For Android, we aim to support the minimum API that the [system webview](https:/
 
 ## What is it?
 
-Fuse (referred to as Fuse, or Fuse framework from here on out) is a framework for hybrid native-web building mobile applications.
+Fuse is a framework for hybrid native-web building mobile applications.
 The Fuse framework takes a "native-first" approach. That is, everything first starts with your native project, whether that be an iOS XCode project, or an Android gradle project.
 
 The Fuse framework is simply a framework that you can import into your project via traditional native dependency management systems, such as
