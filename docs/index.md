@@ -4,6 +4,7 @@ WARNING: This documentation is actively being developed and links may change.
 # Fuse
 
 ![Android Build](https://github.com/btfuse/fuse-android/actions/workflows/instrumented.yml/badge.svg)
+![Android Build](https://github.com/btfuse/fuse-ios/actions/workflows/instrumented.yml/badge.svg)
 ![JS Runtime Build](https://github.com/btfuse/fuse-js/actions/workflows/unit-tests.yml/badge.svg)
 
 A native-first framework for building hybdrid native-web applications.
