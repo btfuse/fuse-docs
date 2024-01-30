@@ -1,6 +1,4 @@
 
-WARNING: This documentation is actively being developed and links may change.
-
 # Getting Started
 
 Fuse Framework provides a protocol for extending the behaviour of the webview. The protocol allows the JS in the webview to make calls over to the native environment via an embedded API server.

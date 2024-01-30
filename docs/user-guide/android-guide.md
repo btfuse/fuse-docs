@@ -1,6 +1,4 @@
 
-WARNING: This documentation is actively being developed and links may change.
-
 # Android User Guide
 
 This guide assumes you've already read and followed the [Getting Started](./getting-started.md) guide. If not, we strongly recommend beginning there first before proceeding.

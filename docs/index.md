@@ -1,6 +1,4 @@
 
-WARNING: This documentation is actively being developed and links may change.
-
 # Fuse
 
 ![Android Build](https://github.com/btfuse/fuse-android/actions/workflows/instrumented.yml/badge.svg)

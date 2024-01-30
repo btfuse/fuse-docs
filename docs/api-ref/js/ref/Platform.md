@@ -1,6 +1,4 @@
 
-WARNING: This documentation is actively being developed and links may change.
-
 # Platform
 
 Enum of supported platforms

@@ -1,6 +1,4 @@
 
-WARNING: This documentation is actively being developed and links may change.
-
 # Getting Started
 
 The Fuse Framework provides a means to build a native application with a webview user interface, without sacrificing the means to use device APIs from the webview.
