@@ -218,7 +218,7 @@ The following read APIs is also available:
 
 WARNING: It's unsafe to use the underlying `InputStream` if any of the read APIs is also used, as they will consume the bytes of the input stream.
 
-Additionally, the packet object also has `getContentLength()` and `getContentType` APIs to know the "kind" of data and the size, as given by the JS module.
+Additionally, the packet object also has `getContentLength()` and `getContentType()` APIs to know the "kind" of data and the size, as given by the JS module.
 
 ## FuseAPIResponse
 
@@ -238,7 +238,7 @@ response.setContentLength(6); // "Hello!"
 response.didFinishHeaders();
 ```
 
-Alternatively, we can also set do this via `sendHeaders`:
+Alternatively, we can also do this via `sendHeaders`:
 
 ```java
 response.sendHeaders(FuseAPIResponseStatus.OK, "text/plain", 6);
@@ -284,7 +284,7 @@ This is quite cumbersome and error prone if you forget a line or miscalculate th
 |`send(JSONObject json)`|Sends a JSON object as `application/json`.|
 |`send(JSONArray json)`|Sends a JSON array as `application/json`.|
 |`send(String data)`|Sends text data as `text/plain`.|
-|`send(FuseError error)`|Sends a serialized `FuseError` obejct as `application/json`.|
+|`send(FuseError error)`|Sends a serialized `FuseError` object as `application/json`.|
 |`send()`|Sends a successful state with no data.|
 |`sendInternalError()`|Sends a 500 status code. Use `send(FuseError)` to send a more useful error signal.|
 |`kill()`|Abruptly and non-gracefully closes the connection.|
