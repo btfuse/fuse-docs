@@ -52,6 +52,7 @@ nav:
     - Getting Started: plugin-development/getting-started.md
     - Fuse JS Modules: plugin-development/js-module.md
     - Android Modules: plugin-development/android-module.md
+    - iOS Modules: plugin-development/ios-module.md
   # - API Reference:
   #   - Index: api-ref/index.md
   #   - Webview:

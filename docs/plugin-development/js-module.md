@@ -555,5 +555,5 @@ This concludes the Fuse JS Module guide, but this example Fuse plugin is incompl
 
 Moving forward, See the the list of native platform guides:
 
-- <span class="broken-link">iOS Plugin Guide</span>
+- [iOS Plugin Guide](ios-module.md)
 - [Android Plugin Guide](android-module.md)
