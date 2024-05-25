@@ -38,7 +38,7 @@ CocoaPods or maven. Unlike other frameworks that generates or manages native pro
 Well that depends. To use the Fuse framework efficiently, knowledge with both native and web development development will be required.
 If native development is not part of your team's skillset, then other hybrid frameworks might be more suitable.
 
-Otherwise you're probably well adept in native development already, why would you use this framework? Well the Native-Webview glue is already built for you with a plugin API. Everything is designed so that you can write the native code inside the native IDE and have access to native intellisense and other build/project features. Surely one could be written and that may do the job if you're only using a WebView for a one-off page, but if the intent is to build fully features native application with a web-based UI backed by a native API, then this framework is probably for you.
+Otherwise you're probably well adept in native development already, why would you use this framework? Well the Native-Webview glue is already built for you with a plugin API. Everything is designed so that you can write the native code inside the native IDE and have access to native intellisense and other build/project features. Surely one could be written and that may do the job if you're only using a WebView for a one-off page, but if the intent is to build fully featured native application with a web-based UI backed by a native API, then this framework is probably for you.
 
 Let's have a look at the other common platforms that achieves the same goal.
 
