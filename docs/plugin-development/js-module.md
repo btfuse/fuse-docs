@@ -26,7 +26,7 @@ These webview environments are more like a browser. Care needs to be taken to us
 
 To create a new JS module, simply create a new node package:
 
-```
+``` bash
 npm init
 ```
 
@@ -36,7 +36,7 @@ When you're done, you'll have a fairly barebones `package.json` file.
 
 Open it and add a `main` and `types` property:
 
-```json
+``` json
 {
     ...
     "main": "./lib/api.js",
@@ -46,7 +46,7 @@ Open it and add a `main` and `types` property:
 
 And while we are here, let's add some scripts:
 
-```json
+``` json
 {
     ...
     "scripts": {
@@ -80,7 +80,7 @@ prevent your JS module from being installed with other modules that may require 
 
 The current recommendation for new Fuse JS modules is the following peer dependency:
 
-```json
+``` json
 {
     "peerDependencies": {
         "@btfuse/core": "0.7.x"
@@ -100,7 +100,7 @@ WARNING: If you install a `devDependency` that is outside of the range of your `
 
 The exact version to choose as your `devDependency` will depend on your mantra. For example, choosing the lowest supported version will help ensure that a breaking change isn't introduced by accidentally using an API that might have been only added in a later feature update. Choosing the latest version of a given supported major will allow testing against the current release.
 
-```bash
+``` bash
 npm install --save-dev @btfuse/core@0.x
 ```
 
@@ -108,7 +108,7 @@ npm install --save-dev @btfuse/core@0.x
 
 In addition to `@btfuse/core`, it's also recommended to install [TypeScript](https://www.typescriptlang.org/).
 
-```bash
+``` bash
 npm install --save-dev typescript
 ```
 
@@ -116,7 +116,7 @@ NOTE: The remainder of this guide will assume you're using TypeScript. If you ch
 
 TypeScript has a `tslib` package that imports reusable runtime helpers which can reduce code size. This should be installed as a `dependency`:
 
-```bash
+``` bash
 npm install tslib
 ```
 
@@ -127,7 +127,7 @@ Both the `package.json` and `package-lock.json` can and should be committed into
 Before we start coding, we must first configure TypeScript.
 A quick way to do this is by issueing the init command:
 
-```bash
+``` bash
 npx tsc --init
 ```
 
@@ -231,9 +231,7 @@ It will include a class that has a public API `echo`, which takes in a single `s
 NOTE: As a plugin guide that focuses purely on building a JS Module, this guide won't have a demonstratable code that can be ran.
 
 
-`./src/EchoPlugin.ts`:
-
-```typescript
+```typescript linenums="1" title="/src/EchoPlugin.ts"
 import {
     FusePlugin,
     ContentType,
@@ -266,7 +264,7 @@ For more information see the Getting Started [Plugin Identifiers](./getting-star
 
 Let's break down our `echo` method that we have implemented.
 
-```typescript
+``` typescript linenums="1"
 public async echo(message: string): Promise<string> {
     let response: FuseAPIResponse = await this._exec('/echo', ContentType.TEXT, message);
     
@@ -283,7 +281,7 @@ It accepts a `string`, and it returns a `Promise<string>`.
 
 A `FusePlugin` has a protected method called `_exec` that accepts a endpoint, and 3 optional parameters, a `ContentType` and variant `TSerializable` type for data. The third `TAPIOpts` parameter will not be covered in this guide.
 
-```typescript
+``` typescript
 /**
  * The execution API. Concrete classes can call this to perform calls to the native side.
  *
@@ -317,7 +315,7 @@ Due to some TypeScript caveats with index-based typings, if you have a concrete 
 to be used as a `TSerializable` object, even if the interface consist of supported types. To work around this,
 a custom concrete interface can be wrapped by a `TFuseSerializable`.
 
-```typescript
+``` typescript
 // Private interface declaration
 interface __MyInterface {
     name: string;
@@ -335,7 +333,7 @@ If the data is not already an `Blob`, then the data will be serialized into a `B
 The `_exec` call will await for a `FuseAPIResponse` to return back from native. The `FuseAPIResponse` object wraps around the response data. Like sending data to native, native always replies back with binary data. The `FuseAPIResponse` provides several APIs to determine if the native sent an error, check the response type, and to read the data.
 
 Here is a small overview:
-```typescript
+``` typescript
 export declare class FuseAPIResponse {
     isError(): boolean;
     getContentLength(): number;
@@ -364,7 +362,7 @@ They however only support textual data and data transfer is not very efficient c
 
 A `FusePlugin` can create a callback using a protected `_createCallback` method:
 
-```typescript
+``` typescript
 let callbackID: string = this._createCallback((payload: string) => {
     // Callback was invoked!
 });
@@ -376,7 +374,7 @@ Callbacks are held in a global object and will not be released until the plugin 
 
 Let's setup a new API that uses this callback method:
 
-```typescript
+``` typescript
 export class EchoPlugin extends FusePlugin {
     ...
 
@@ -407,7 +405,7 @@ If you recall earlier, the Semantic Versioning Specification calls for an explic
 
 Let's add that now in our `src/api.ts` file:
 
-```typescript
+``` typescript
 export {EchoPlugin} from './EchoPlugin.ts';
 ```
 
@@ -415,15 +413,13 @@ That was easy!
 
 Now anybody importing your package can do so via:
 
-```typescript
+``` typescript
 import {EchoPlugin} from 'my-package';
 ```
 
 If your JS module is a simple enough module, you may want to add a default export:
 
-```typescript
-// src/api.ts
-
+``` typescript title="/src/EchoPlugin.ts"
 import {EchoPlugin} from './EchoPlugin';
 
 export {EchoPlugin};
@@ -439,7 +435,7 @@ However, we can still talk about unit testing and mock the Fuse API.
 
 [JestJS](https://jestjs.io/) is an excellent JavaScript unit testing framework built by Meta. It's highly scalable and performant, can run tests concurrently, and has community support for TypeScript.
 
-```bash
+``` bash
 npm install --save-dev @types/jest jest ts-jest ts-node jest-environment-jsdom
 ```
 
@@ -447,7 +443,7 @@ By default, Jest only works within a "NodeJS" environment, therefore `jest-envir
 
 Let's create a `jest.config.ts` file now
 
-```typescript
+``` typescript linenums="1" title="/jest.config.ts"
 import type {Config} from 'jest';
 
 export const JEST_CONFIG: Config = {
@@ -463,7 +459,7 @@ export default JEST_CONFIG;
 
 Now let's update our NPM scripts to use Jest during `npm test`. Edit `package.json`:
 
-```json
+``` json
 {
     ...
     "scripts": {
@@ -488,7 +484,7 @@ With the new files created, your directory structure should look like:
 
 Inside `spec/EchoPlugin.spec.ts`:
 
-```typescript
+``` typescript linenums="1" title="/spec/EchoPlugin.spec.ts"
 // Import your plugin
 import {EchoPlugin} from '../src/EchoPlugin';
 

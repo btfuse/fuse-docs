@@ -28,7 +28,7 @@ Fuse framework makes use of TypeScript so it will make sense to also use TypeScr
 
 Let's start with installing our dependencies:
 
-```bash
+``` bash
 npm install --save-dev webpack webpack-cli copy-webpack-plugin typescript ts-loader source-map-loader @btfuse/core
 ```
 
@@ -51,7 +51,7 @@ Let's start with creating `/webpack.base.config.js`:
 TIP: The webpack config script is a node program, so Node APIs can be used here,
 if desired.
 
-```js
+``` javascript linenums="1" title="/webpack.base.config.js"
 module.exports = {
     // inline source maps are recommended because the Dev Tools do not have
     // access to the native asset loaders.
@@ -106,7 +106,7 @@ NOTE: As it stands, this base webpack will not compile any source code because w
 
 Typescript can provide you with a base config with several, so run:
 
-```bash
+``` bash
 npx tsc --init
 ```
 
@@ -123,7 +123,7 @@ When you're done, your `/tsconfig.json` file should look something like this:
 NOTE: Normally comments aren't allowed in JSON files, as the spec doesn't define the concept of comments,
 however TypeScript uses JSON-C, a subset of JSON that supports comments.
 
-```jsonc
+``` json linenums="1" title="/tsconfig.json"
 {
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
@@ -239,9 +239,7 @@ however TypeScript uses JSON-C, a subset of JSON that supports comments.
 
 Now we can start building a sample application. We'll make a `src` folder that will contain our web assets and TypeScript source code.
 
-`/src/index.html`:
-
-```html
+``` html linenums="1" title="/src/index.html"
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -252,9 +250,7 @@ Now we can start building a sample application. We'll make a `src` folder that w
 </html>
 ```
 
-`/src/App.ts`:
-
-```typescript
+``` typescript linenums="1" title="/src/App.ts"
 import {
     FuseContext,
     FuseContextBuilder,

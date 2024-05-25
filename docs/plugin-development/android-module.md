@@ -71,7 +71,7 @@ The Fuse framework can be synced via maven and is available via <a href="https:/
 First we'll need to add this maven repo. Edit the `settings.gradle.kts` file.
 Inside the `dependencyResolutionManagement.repositories` block add:
 
-```kotlin
+``` kotlin
 maven {
     url = uri("https://archiva.breautek.com/repository/breautek")
 }
@@ -79,7 +79,7 @@ maven {
 
 The full file should now look like:
 
-```kotlin
+``` kotlin linenums="1" title="settings.gradle.kts"
 pluginManagement {
     repositories {
         google()
@@ -87,6 +87,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -109,7 +110,7 @@ This will allow us to pull and add fuse dependencies to our modules.
 Let's open `EchoPlugin`'s `build.gradle.kts` and add our dependency now.
 Inside the `dependencies` block add:
 
-```kotlin
+``` kotlin
 compileOnly("com.breautek.fuse:core:0.7.1")
 ```
 
@@ -121,7 +122,7 @@ NOTE: We can (and should) use an exact version pin, because unlike NodeJS module
 
 The full dependency blocks will look something like:
 
-```kotlin
+``` kotlin
 dependencies {
     compileOnly("com.breautek.fuse:core:0.7.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -136,7 +137,7 @@ dependencies {
 
 Now we are ready to write some code. Let's create a new class `EchoPlugin`:
 
-```java
+``` java linenums="1" title="EchoPlugin.java"
 package com.example.fuse.echoplugin;
 
 import java.io.IOException;
@@ -172,7 +173,7 @@ Let's break down what we've just done.
 
 #### constructor
 
-```java
+``` java
 public EchoPlugin(FuseContext context) {
     super(context);
 }
@@ -231,7 +232,7 @@ Most of the time, `FuseAPIResponse` will be used to send a small data packet res
 
 The API protocol uses HTTP, so the first thing required is setting and sending the headers. This must be done before any data is sent. To acheive this, set the status, content type, and content length, and then call `didFinishHeaders()`.
 
-```java
+``` java
 response.setStatus(FuseAPIResponseStatus.OK);
 response.setContentType("text/plain");
 response.setContentLength(6); // "Hello!"
@@ -240,19 +241,19 @@ response.didFinishHeaders();
 
 Alternatively, we can also do this via `sendHeaders`:
 
-```java
+``` java
 response.sendHeaders(FuseAPIResponseStatus.OK, "text/plain", 6);
 ```
 
 Once `didFinishHeaders()` is called, headers cannot be changed, but data can now be pushed via `pushData`, which accepts a `byte[]`.
 
-```java
+``` java
 response.pushData("Hello!".getBytes());
 ```
 
 `pushData` can be invoked as many times as needed, which is useful for chunking data such as reading from a data stream. Once you're finished writing data, use `didFinish` to signal that you're done.
 
-```java
+``` java
 response.didFinish();
 ```
 
@@ -262,7 +263,7 @@ NOTE: Pushing data will write to the underlying network socket but data is not d
 
 A full example may look like this:
 
-```java
+``` java
 response.setStatus(FuseAPIResponseStatus.OK);
 response.setContentType("text/plain");
 response.setContentLength(6); // "Hello!"
@@ -291,7 +292,7 @@ This is quite cumbersome and error prone if you forget a line or miscalculate th
 
 We can rewrite our above example with:
 
-```java
+``` java
 response.send("Hello!");
 ```
 
@@ -315,7 +316,7 @@ But for a watch-style callback, these limitations are probably fine as the data 
 
 Let's add a new instance member, `String callbackID` on our `EchoPlugin`.
 
-```java
+``` java
 public class EchoPlugin extends FusePlugin {
     private String callbackID;
 
@@ -325,7 +326,7 @@ public class EchoPlugin extends FusePlugin {
 
 Let's add couple new `APIHandlers` to our `EchoPlugin`:
 
-```java
+``` java
 @Override
 protected void _initHandles() {
     ...
@@ -402,7 +403,7 @@ The test tools library does require android APIs and thefore can only be used in
 
 In the dependencies block, add:
 
-```kotlin
+``` kotlin
 androidTestImplementation("com.breautek.fuse:test-tools:0.0.1")
 ```
 
@@ -410,7 +411,7 @@ TIP: You can find the latest release [here](https://archiva.breautek.com/#artifa
 
 And because our unit test will also use the core fuse framework, we need to also add:
 
-```kotlin
+``` kotlin
 androidTestImplementation("com.breautek.fuse:core:0.7.1")
 ```
 
@@ -425,7 +426,7 @@ Inside the `androidTest` variant, create a new `EchoPluginTest` class:
 
 And add the following code:
 
-```java
+``` java linenums="1" title="EchoPluginTest.java"
 package com.example.fuse.echoplugin.test;
 
 import static org.junit.Assert.assertEquals;
@@ -479,7 +480,7 @@ public class EchoPluginTest {
 
 Inside the `androidTest` variant, create a new `EchoTestActivity` class:
 
-```java
+``` java linenums="1" title="EchoTestActivity.java"
 package com.example.fuse.echoplugin.test;
 
 import android.os.Bundle;

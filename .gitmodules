@@ -1,0 +1,6 @@
+[submodule "external/fuse-js"]
+	path = external/fuse-js
+	url = https://github.com/btfuse/fuse-js.git
+[submodule "build-tools"]
+	path = build-tools
+	url = https://github.com/btfuse/build-tools.git

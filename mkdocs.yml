@@ -26,18 +26,38 @@ theme:
   favicon: res/favicon.svg
   features:
     - search.suggest
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
   palette:
     primary: white
   custom_dir: theme_overrides
 
 plugins:
-  - search
+  - search: []
+  # - typedoc:
+  #     source: './external/fuse-js/'
+  #     tsconfig: './external/fuse-js/tsconfig.json'
+  #     options: './external/fuse-js/typedoc.json'
+    # tsconfig: './external/fuse-js/tsconfig.json'
+  # - typedoc:
+    # tsconfig: './external/fuse-js/tsconfig.json'
+  #   # output_dir: 'FuseJSReference'
+  #   # name: 'Fuse JS Reference'
+  #   # disable_system_check: False
 
 markdown_extensions:
   - callouts
   - pymdownx.emoji:
       emoji_index: !!python/name:pymdownx.emoji.gemoji
       emoji_generator: !!python/name:pymdownx.emoji.to_alt
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
 
 extra_css:
   - css/tip.css
@@ -53,6 +73,9 @@ nav:
     - Fuse JS Modules: plugin-development/js-module.md
     - Android Modules: plugin-development/android-module.md
     - iOS Modules: plugin-development/ios-module.md
+  - API Reference:
+    - Webview:
+      - Core: ref/fuse-js/modules.html
   # - API Reference:
   #   - Index: api-ref/index.md
   #   - Webview:

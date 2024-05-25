@@ -57,7 +57,7 @@ If you don't already have cocoapods installed, see [CocoaPods](https://cocoapods
 
 Once CocoaPods is installed, create a `Podfile` inside the `ios` directory and paste in the following content:
 
-```ruby
+``` ruby linenums="1" title="/Podfile"
 workspace 'EchoPlugin'
 
 platform :ios, '15.0'
@@ -124,7 +124,7 @@ Now we are ready to start writing some code!
 
 Create a new `Header` file inside the `EchoPlugin` project and name it `EchoPlugin.h`. Paste in the following contents:
 
-```obj-c
+``` obj-c title="EchoPlugin.h" linenums="1"
 #ifndef EchoPlugin_h
 #define EchoPlugin_h
 
@@ -140,7 +140,7 @@ Create a new `Header` file inside the `EchoPlugin` project and name it `EchoPlug
 
 Now create a new `Objective-C` source file inside teh `EchoPlugin`, name it `EchoPlugin.m`. Paste in the following contents:
 
-```obj-c
+``` obj-c title="EchoPlugin.m" linenums="1"
 
 #import "EchoPlugin.h"
 #import <BTFuse/BTFuse.h>
@@ -208,7 +208,7 @@ In the sample code, we use `readAsBinary` to receive a `NSData*` object and pass
 
 An `NSInputStream*` is also available on the client object:
 
-```objective-c
+``` obj-c
 NSInputStream* input = [[packet getClient] getInputStream];
 ```
 
@@ -227,7 +227,7 @@ Most of the time, `BTFuseAPIResponse` will be used to send a small data packet r
 
 The API protocol uses HTTP, so the first thing required is setting and sending the headers. This must be done before any data is sent. To acheive this, set the status, content type, and content length, and then call `didFinishHeaders`.
 
-```objective-c
+``` obj-c
 [response setStatus: BTFuseAPIResponseStatusOk];
 [response setContentType:@"text/plain"];
 [response setContentLength: 6]; // "Hello!"
@@ -236,20 +236,20 @@ The API protocol uses HTTP, so the first thing required is setting and sending t
 
 Alternatively, we can also do this via `finishHeaders:withContentType:withContentLength`:
 
-```objective-c
+``` obj-c
 [response finishHeaders: BTFuseAPIResponseStatusOk withContentType: @"text/plain" withContentLength: 6];
 ```
 
 Once `didFinishHeaders` is called, headers cannot be changed, but data can now be pushed via `pushData`, which accepts a `NSData*` buffer.
 
-```objective-c
+``` obj-c
 NSData* buffer = [@"Hello!" dataUsingEncoding: NSUTF8StringEncoding];
 [response pushData: buffer];
 ```
 
 `pushData` can be invoked as many times as needed, which is useful for chunking data such as reading from a data stream. Once you're finished writing data, use `didFinish` to signal that you're done.
 
-```objective-c
+``` obj-c
 [response didFinish];
 ```
 
@@ -259,7 +259,7 @@ NOTE: Pushing data will write to the underlying network socket but data is not d
 
 A full example may look like this:
 
-```objective-c
+``` obj-c
 [response setStatus: BTFuseAPIResponseStatusOk];
 [response setContentType:@"text/plain"];
 [response setContentLength: 6]; // "Hello!"
@@ -289,7 +289,7 @@ This is quite cumbersome and error prone if you forget a line or miscalculate th
 
 We can rewrite our above example with:
 
-```objective-c
+``` obj-c
 [response sendString: @"Hello!"];
 ```
 
@@ -313,9 +313,7 @@ But for a watch-style callback, these limitations are probably fine as the data 
 
 Let's add a new instance member, `NSString* callbackID` on our `EchoPlugin`.
 
-`EchoPlugin.m`:
-
-```objective-c
+``` obj-c title="EchoPlugin.m"
 @implementation EchoPlugin {
     NSString* callbackID;
 }
@@ -333,9 +331,7 @@ Let's add a new instance member, `NSString* callbackID` on our `EchoPlugin`.
 
 Now let's add couple new handlers to our `EchoPlugin`.
 
-`EchoPlugin.m`:
-
-```objective-c
+``` obj-c title="EchoPlugin.m"
 - (void) initHandles {
     ...
 
@@ -365,9 +361,7 @@ Now we have a `/registerCallback` handler that reads a string and assigns `callb
 
 Let's add the last piece now, a periodic timer that uses the callback id if present.
 
-`EchoPlugin.m`:
-
-```objective-c
+``` obj-c title="EchoPlugin.m"
 - (instancetype) init:(BTFuseContext*) context {
     self = [super init:context];
 
