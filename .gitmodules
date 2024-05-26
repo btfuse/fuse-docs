@@ -4,3 +4,6 @@
 [submodule "build-tools"]
 	path = build-tools
 	url = https://github.com/btfuse/build-tools.git
+[submodule "external/fuse-android"]
+	path = external/fuse-android
+	url = https://github.com/btfuse/fuse-android.git

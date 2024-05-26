@@ -78,7 +78,9 @@ nav:
     - Android Modules: plugin-development/android-module.md
     - iOS Modules: plugin-development/ios-module.md
   - API Reference:
-    - FuseJS: ref/fuse-js/index.html
+    - Fuse JS: ref/fuse-js/index.html
+    - Fuse Android: ref/fuse-android/index.html
+
   # - API Reference:
   #   - Index: api-ref/index.md
   #   - Webview:

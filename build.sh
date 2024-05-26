@@ -16,12 +16,13 @@
 source build-tools/DirectoryTools.sh
 source build-tools/assertions.sh
 
-npx typedoc \
-    --tsconfig external/fuse-js/tsconfig.json \
-    --out docs/ref/fuse-js \
-    --excludePrivate \
-    --excludeInternal \
-    external/fuse-js/src/api.ts
+npx typedoc --options typedoc.fusejs.json
+spushd external/fuse-android
+    ./gradlew :fuse:generateJavadoc
+spopd
+
+rm -rf ./docs/ref/fuse-android
+cp -r ./external/fuse-android/fuse/build/docs/javadoc ./docs/ref/fuse-android
 
 source ./venv/bin/activate
 if [ "$1" == "serve" ]; then
