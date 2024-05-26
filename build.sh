@@ -24,7 +24,13 @@ spopd
 rm -rf ./docs/ref/fuse-android
 cp -r ./external/fuse-android/fuse/build/docs/javadoc ./docs/ref/fuse-android
 
-source ./venv/bin/activate
+# If not GH action, then source virtual env.
+# CI doesn't need virtual environments, it gets scaffolded with the proper
+# environment and destroyed.
+if [ ! -n "$GITHUB_ACTIONS" ]; then
+    source ./venv/bin/activate
+fi
+
 if [ "$1" == "serve" ]; then
     mkdocs serve
 else
