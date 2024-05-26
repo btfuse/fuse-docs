@@ -1,6 +1,6 @@
 {
     "navigationLinks": {
-        "Back To Home": "/"
+        "Main Documentation": "/"
     },
     "name": "FuseJS",
     "out": "./docs/ref/fuse-js",
