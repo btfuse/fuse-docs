@@ -41,8 +41,7 @@ jobs:
       - run: pip3 install -r requirements.txt
       - run: npm install
       - run: cd external/fuse-js && npm install
-      - run: npm run build:ref:fusejs
-      - run: mkdocs build
+      - run: ./build.sh
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
