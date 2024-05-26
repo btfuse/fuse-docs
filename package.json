@@ -5,13 +5,14 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:ref:fusejs": "npx typedoc --options typedoc.fusejs.json"
   },
   "author": "norman@breautek.com",
   "license": "Apache-2.0",
   "devDependencies": {
-    "typedoc": "^0.25.7",
-    "typedoc-plugin-markdown": "^3.17.1",
-    "typescript": "^5.3.3"
+    "typedoc": "^0.25.13",
+    "typedoc-plugin-markdown": "^4.0.2",
+    "typescript": "^5.4.5"
   }
 }

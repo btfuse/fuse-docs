@@ -36,6 +36,10 @@ theme:
 plugins:
   - search: []
   # - typedoc:
+  #     source: ../fuse-js/src
+  #     tsconfig: ../fuse-js/tsconfig.json
+  #     output_dir: ./docs/ref/test
+  # - typedoc:
   #     source: './external/fuse-js/'
   #     tsconfig: './external/fuse-js/tsconfig.json'
   #     options: './external/fuse-js/typedoc.json'
@@ -73,9 +77,8 @@ nav:
     - Fuse JS Modules: plugin-development/js-module.md
     - Android Modules: plugin-development/android-module.md
     - iOS Modules: plugin-development/ios-module.md
-  # - API Reference:
-  #   - Webview:
-  #     - Core: ref/fuse-js/modules.html
+  - API Reference:
+    - FuseJS: ref/fuse-js/index.html
   # - API Reference:
   #   - Index: api-ref/index.md
   #   - Webview:
