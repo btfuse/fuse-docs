@@ -36,4 +36,7 @@ if [ "$1" == "serve" ]; then
 else
     mkdocs build
 fi
-deactivate
+
+if [ ! -n "$GITHUB_ACTIONS" ]; then
+    deactivate
+fi
