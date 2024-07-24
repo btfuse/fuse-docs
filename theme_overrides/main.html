@@ -1,5 +1,18 @@
 {% extends "base.html" %}
 
+{% block extrahead %}
+  {{ super() }}
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2HMENKGL91"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-2HMENKGL91');
+    </script>
+{% endblock %}
+
 {% block content %}
     <div class="admonition warning">
         <p class="admonition-title">Warning</p>

@@ -34,6 +34,7 @@ theme:
   custom_dir: theme_overrides
 
 plugins:
+  - tags: []
   - search: []
   # - typedoc:
   #     source: ../fuse-js/src
