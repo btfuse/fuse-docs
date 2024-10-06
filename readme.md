@@ -14,6 +14,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
+# Notice
+
+Moved to a [monorepo](https://github.com/btfuse/fuse) structure.
+
 # Contributor Documentation
 
 Fuse documentation and website is powered by mkdocs. For full documentation visit [mkdocs.org](https://www.mkdocs.org).
